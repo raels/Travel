@@ -1,0 +1,2 @@
+module Charts::SamplesHelper
+end
