@@ -1,0 +1,57 @@
+<h1>Listing trip_estimates</h1>
+
+<table>
+  <tr>
+    <th>Cost center</th>
+    <th>Traveller</th>
+    <th>Manager</th>
+    <th>Destination city</th>
+    <th>Destination airport</th>
+    <th>Departure city</th>
+    <th>Departure airport</th>
+    <th>Booked at</th>
+    <th>Started at</th>
+    <th>Ended at</th>
+    <th>Hotel</th>
+    <th>Air cost</th>
+    <th>Estimated hotel nightly expense with tax</th>
+    <th>Hotel nights</th>
+    <th>Estimated car daily expense with tax</th>
+    <th>Rental car days</th>
+    <th>Estimated total cost usd</th>
+    <th>Purpose</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trip_estimates.each do |trip_estimate| %>
+  <tr>
+    <td><%= trip_estimate.cost_center %></td>
+    <td><%= trip_estimate.traveller %></td>
+    <td><%= trip_estimate.manager %></td>
+    <td><%= trip_estimate.destination_city %></td>
+    <td><%= trip_estimate.destination_airport %></td>
+    <td><%= trip_estimate.departure_city %></td>
+    <td><%= trip_estimate.departure_airport %></td>
+    <td><%= trip_estimate.booked_at %></td>
+    <td><%= trip_estimate.started_at %></td>
+    <td><%= trip_estimate.ended_at %></td>
+    <td><%= trip_estimate.hotel %></td>
+    <td><%= trip_estimate.air_cost %></td>
+    <td><%= trip_estimate.estimated_hotel_nightly_expense_with_tax %></td>
+    <td><%= trip_estimate.hotel_nights %></td>
+    <td><%= trip_estimate.estimated_car_daily_expense_with_tax %></td>
+    <td><%= trip_estimate.rental_car_days %></td>
+    <td><%= trip_estimate.estimated_total_cost_usd %></td>
+    <td><%= trip_estimate.purpose %></td>
+    <td><%= link_to 'Show', trip_estimate %></td>
+    <td><%= link_to 'Edit', edit_trip_estimate_path(trip_estimate) %></td>
+    <td><%= link_to 'Destroy', trip_estimate, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Trip estimate', new_trip_estimate_path %>

@@ -1,4 +1,8 @@
 Travel::Application.routes.draw do
+  resources :cost_centers
+
+  resources :trip_estimates
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -1,0 +1,29 @@
+table.dashboard > tbody > tr > td {
+  /* display:block; */
+  width: 200px;
+}
+
+div.mydiv > table > tbody > tr > td {
+  /* display:block; */
+  width: 200px;
+  text-align: right;
+}
+
+div.mydiv > table > thead > tr > th {
+  /* display:block; */
+  width: 150px;
+  text-align: center;
+}
+
+div.mydiv > table {
+  /* display:block; */
+  table-layout: fixed;
+  width: 400px;
+}
+
+.money {
+	text-align: right;
+	/* width: 150px; */
+	/* background-color: LightGray; */
+}
+

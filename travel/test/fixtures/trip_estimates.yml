@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cost_center: MyString
+  traveller: MyString
+  manager: MyString
+  destination_city: MyString
+  destination_airport: MyString
+  departure_city: MyString
+  departure_airport: MyString
+  booked_at: 2012-05-29 23:19:32
+  started_at: 2012-05-29 23:19:32
+  ended_at: 2012-05-29 23:19:32
+  hotel: MyString
+  air_cost: 9.99
+  estimated_hotel_nightly_expense_with_tax: 9.99
+  hotel_nights: 1
+  estimated_car_daily_expense_with_tax: 9.99
+  rental_car_days: 1
+  estimated_total_cost_usd: 9.99
+  purpose: MyString
+
+two:
+  cost_center: MyString
+  traveller: MyString
+  manager: MyString
+  destination_city: MyString
+  destination_airport: MyString
+  departure_city: MyString
+  departure_airport: MyString
+  booked_at: 2012-05-29 23:19:32
+  started_at: 2012-05-29 23:19:32
+  ended_at: 2012-05-29 23:19:32
+  hotel: MyString
+  air_cost: 9.99
+  estimated_hotel_nightly_expense_with_tax: 9.99
+  hotel_nights: 1
+  estimated_car_daily_expense_with_tax: 9.99
+  rental_car_days: 1
+  estimated_total_cost_usd: 9.99
+  purpose: MyString

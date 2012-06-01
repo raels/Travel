@@ -1,0 +1,89 @@
+<%= form_for(@trip_estimate) do |f| %>
+  <% if @trip_estimate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip_estimate.errors.count, "error") %> prohibited this trip_estimate from being saved:</h2>
+
+      <ul>
+      <% @trip_estimate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cost_center %><br />
+    <%= f.text_field :cost_center %>
+  </div>
+  <div class="field">
+    <%= f.label :traveller %><br />
+    <%= f.text_field :traveller %>
+  </div>
+  <div class="field">
+    <%= f.label :manager %><br />
+    <%= f.text_field :manager %>
+  </div>
+  <div class="field">
+    <%= f.label :destination_city %><br />
+    <%= f.text_field :destination_city %>
+  </div>
+  <div class="field">
+    <%= f.label :destination_airport %><br />
+    <%= f.text_field :destination_airport %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_city %><br />
+    <%= f.text_field :departure_city %>
+  </div>
+  <div class="field">
+    <%= f.label :departure_airport %><br />
+    <%= f.text_field :departure_airport %>
+  </div>
+  <div class="field">
+    <%= f.label :booked_at %><br />
+    <%= f.datetime_select :booked_at %>
+  </div>
+  <div class="field">
+    <%= f.label :started_at %><br />
+    <%= f.datetime_select :started_at %>
+  </div>
+  <div class="field">
+    <%= f.label :ended_at %><br />
+    <%= f.datetime_select :ended_at %>
+  </div>
+  <div class="field">
+    <%= f.label :hotel %><br />
+    <%= f.text_field :hotel %>
+  </div>
+  <div class="field">
+    <%= f.label :air_cost %><br />
+    <%= f.text_field :air_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated_hotel_nightly_expense_with_tax %><br />
+    <%= f.text_field :estimated_hotel_nightly_expense_with_tax %>
+  </div>
+  <div class="field">
+    <%= f.label :hotel_nights %><br />
+    <%= f.number_field :hotel_nights %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated_car_daily_expense_with_tax %><br />
+    <%= f.text_field :estimated_car_daily_expense_with_tax %>
+  </div>
+  <div class="field">
+    <%= f.label :rental_car_days %><br />
+    <%= f.number_field :rental_car_days %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated_total_cost_usd %><br />
+    <%= f.text_field :estimated_total_cost_usd %>
+  </div>
+  <div class="field">
+    <%= f.label :purpose %><br />
+    <%= f.text_field :purpose %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

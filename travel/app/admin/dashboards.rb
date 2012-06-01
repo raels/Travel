@@ -1,3 +1,25 @@
+# right justified and padded within N characters
+
+def rj_money amount, width=15
+	number_to_currency(amount).rjust(width)
+end
+
+def rj_money_nbsp amount, width=15
+	number_to_currency(amount).rjust(width).gsub(/ /,'&nbsp;')
+end
+
+def rj_money_pre amount, width=15
+	'<pre>'+rj_money(amount, width)+'</pre>'
+end
+
+def rj_money_safe amount, width=15
+	rj_money(amount, width).html_safe
+end
+
+def rj_money_pre_safe amount, width=15
+	rj_money_pre(amount,width).html_safe
+end
+
 ActiveAdmin::Dashboards.build do
 
   # Define your dashboard sections here. Each block will be
@@ -41,4 +63,45 @@ ActiveAdmin::Dashboards.build do
   # section "Membership Summary", :if => :memberships_enabled?
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 
+  section "Quarterly Expense Totals", :priority => 2 do
+	pre ("Q1: " + rj_money(TripEstimate.q1total))
+	pre ("Q2: " + rj_money(TripEstimate.q2total))
+	pre ("Q3: " + rj_money(TripEstimate.q3total))
+	pre ("Q4: " + rj_money(TripEstimate.q4total))
+	
+  end
+
+	
+
+  [:q1, :q2, :q3, :q4, :year_to_date].each do |quarter|
+		section "Period:  #{quarter.to_s.upcase}" do
+			para ""
+			table_for TripEstimate.send(quarter).select('traveller, sum(estimated_total_cost_usd) as total').group('traveller') do 
+				column :traveller
+				column :quarter_total do |t|
+					number_to_currency t.total
+				end
+			end
+		end
+	end
+
+  section "Recent changes", :priority => 1 do
+	table_for TripEstimate.recent(5) do
+		column :traveller
+		column :entered_at do |trip|
+			link_to( trip.created_at.localtime.to_s(:db), admin_trip_estimate_path(trip) )
+		end
+		column :estimated_total_cost_usd do |trip|
+			#para link_to( ('<pre>'+number_to_currency(trip.estimated_total_cost_usd).rjust(15)+'</pre>').html_safe, admin_trip_estimate_path(trip) )
+			#rj_money_pre_safe(trip.estimated_total_cost_usd)
+			rj_money_nbsp(trip.estimated_total_cost_usd).html_safe
+		end
+		# column :estimated_total_cost_usd do |trip|
+		# 	column :max_width => '100px' do
+		# 		link_to( number_to_currency(trip.estimated_total_cost_usd).rjust(15), admin_trip_estimate_path(trip) )
+		# 	end
+		# end
+		
+	end
+  end
 end

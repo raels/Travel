@@ -1,0 +1,95 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cost center:</b>
+  <%= @trip_estimate.cost_center %>
+</p>
+
+<p>
+  <b>Traveller:</b>
+  <%= @trip_estimate.traveller %>
+</p>
+
+<p>
+  <b>Manager:</b>
+  <%= @trip_estimate.manager %>
+</p>
+
+<p>
+  <b>Destination city:</b>
+  <%= @trip_estimate.destination_city %>
+</p>
+
+<p>
+  <b>Destination airport:</b>
+  <%= @trip_estimate.destination_airport %>
+</p>
+
+<p>
+  <b>Departure city:</b>
+  <%= @trip_estimate.departure_city %>
+</p>
+
+<p>
+  <b>Departure airport:</b>
+  <%= @trip_estimate.departure_airport %>
+</p>
+
+<p>
+  <b>Booked at:</b>
+  <%= @trip_estimate.booked_at %>
+</p>
+
+<p>
+  <b>Started at:</b>
+  <%= @trip_estimate.started_at %>
+</p>
+
+<p>
+  <b>Ended at:</b>
+  <%= @trip_estimate.ended_at %>
+</p>
+
+<p>
+  <b>Hotel:</b>
+  <%= @trip_estimate.hotel %>
+</p>
+
+<p>
+  <b>Air cost:</b>
+  <%= @trip_estimate.air_cost %>
+</p>
+
+<p>
+  <b>Estimated hotel nightly expense with tax:</b>
+  <%= @trip_estimate.estimated_hotel_nightly_expense_with_tax %>
+</p>
+
+<p>
+  <b>Hotel nights:</b>
+  <%= @trip_estimate.hotel_nights %>
+</p>
+
+<p>
+  <b>Estimated car daily expense with tax:</b>
+  <%= @trip_estimate.estimated_car_daily_expense_with_tax %>
+</p>
+
+<p>
+  <b>Rental car days:</b>
+  <%= @trip_estimate.rental_car_days %>
+</p>
+
+<p>
+  <b>Estimated total cost usd:</b>
+  <%= @trip_estimate.estimated_total_cost_usd %>
+</p>
+
+<p>
+  <b>Purpose:</b>
+  <%= @trip_estimate.purpose %>
+</p>
+
+
+<%= link_to 'Edit', edit_trip_estimate_path(@trip_estimate) %> |
+<%= link_to 'Back', trip_estimates_path %>
