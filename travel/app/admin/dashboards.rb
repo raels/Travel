@@ -63,29 +63,50 @@ ActiveAdmin::Dashboards.build do
   # section "Membership Summary", :if => :memberships_enabled?
   # section "Membership Summary", :if => Proc.new { current_admin_user.account.memberships.any? }
 
-  section "Quarterly Expense Totals", :priority => 2 do
-	pre ("Q1: " + rj_money(TripEstimate.q1total))
-	pre ("Q2: " + rj_money(TripEstimate.q2total))
-	pre ("Q3: " + rj_money(TripEstimate.q3total))
-	pre ("Q4: " + rj_money(TripEstimate.q4total))
+if false
+  section "Quarterly Expense Totals", :priority => 9 do
+	pre ("Q1:  " + rj_money(TripEstimate.q1total))
+	pre ("Q2:  " + rj_money(TripEstimate.q2total))
+	pre ("Q3:  " + rj_money(TripEstimate.q3total))
+	pre ("Q4:  " + rj_money(TripEstimate.q4total))
+	pre ("YTD: " + rj_money(TripEstimate.ytd_total))
 	
   end
 
 	
+	#   [:q1, :q2, :q3, :q4, :year_to_date].each do |quarter|
+	# 	section "Period:  #{quarter.to_s.upcase}" do
+	# 		div :style => 'layout:block;' do
+	# 			br
+	# 			para ""
+	# 			table_for TripEstimate.send(quarter).select('traveller, sum(estimated_total_cost_usd) as total').group('traveller') do 
+	# 				column :traveller
+	# 				column :quarter_total do |t|
+	# 					number_to_currency t.total
+	# 				end
+	# 			end
+	# 		end
+	# 	end
+	# end
+
+  section "Quarterly Details", :priority => 1 do
 
   [:q1, :q2, :q3, :q4, :year_to_date].each do |quarter|
-		section "Period:  #{quarter.to_s.upcase}" do
-			para ""
-			table_for TripEstimate.send(quarter).select('traveller, sum(estimated_total_cost_usd) as total').group('traveller') do 
-				column :traveller
-				column :quarter_total do |t|
-					number_to_currency t.total
+			div :style => 'layout:inline-block;' do
+				h3 "Period: #{quarter.to_s.upcase}"
+				table_for TripEstimate.send(quarter).select('traveller, sum(estimated_total_cost_usd) as total').group('traveller') do 
+					column :traveller
+					column :quarter_total do |t|
+						number_to_currency t.total
+					end
 				end
 			end
+			para ''
+			para ''
 		end
 	end
-
-  section "Recent changes", :priority => 1 do
+end
+  section "Recent changes", :priority => 2 do
 	table_for TripEstimate.recent(5) do
 		column :traveller
 		column :entered_at do |trip|
@@ -104,4 +125,29 @@ ActiveAdmin::Dashboards.build do
 		
 	end
   end
+
+	#   section "Sample Graph", :priority => 2 do
+	# div :style => "display:block;" do
+	#       br
+	#       text_node %{<iframe src="/charts/samples" width="800" height="500" scrolling="no" frameborder="no"></iframe>}.html_safe
+	#     end
+	#   end
+
+  section "Expenses", :priority => 3 do
+	div :id => 'qebt', :style=>"min-width: 400px; width:500px; height: 400px; margin: 0 auto" do
+	end 
+	
+	div :style => 'display:inline-block;float:right;' do
+	  script :type => 'text/javascript' do
+		 HighLevelCharting.stacked_bar_chart(
+			'qebt',
+			"Expenses by Traveler for #{Time.now.year}" , 
+			TripEstimate.quarterly_report(:q1,:q2,:q3,:q4,:year_to_date),
+			:categories => [:q1,:q2,:q3,:q4,:year_to_date] 
+			).html_safe.js_code
+		end
+	end
+  end
+
+
 end

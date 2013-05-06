@@ -31,6 +31,8 @@ ActiveAdmin.register TripEstimate do
 		column :purpose
 	end
 	
+	#filter :date_booked_at, :as => :datepicker
+	
 	index do
 		column :cost_center
 		column :traveller
@@ -44,13 +46,13 @@ ActiveAdmin.register TripEstimate do
 		column :ended_at, :as => :datepicker
 		column :hotel
 		column("Air Cost", :sortable => :air_cost) { |trip| number_to_currency trip.air_cost }
-		#column :air_cost 
 		column(:estimated_hotel_nightly_expense_with_tax) { |trip| number_to_currency trip.estimated_hotel_nightly_expense_with_tax }
 		column :hotel_nights
 		column(:estimated_car_daily_expense_with_tax) { |trip| number_to_currency trip.estimated_car_daily_expense_with_tax }
 		column :rental_car_days
 		column(:estimated_total_cost_usd) { |trip| number_to_currency trip.estimated_total_cost_usd }
 		column :purpose
+		
 		
 		default_actions
 	end	

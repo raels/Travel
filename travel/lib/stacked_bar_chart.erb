@@ -1,0 +1,81 @@
+var chart;
+$(document).ready(function() {
+	chart = new Highcharts.Chart({
+		chart: {
+			renderTo: '<%= html_id %>',
+			type: 'column',
+			spacingBottom: 100,
+			plotBackgroundColor: 'white',
+			plotShadow: true
+		},
+		title: {
+			text: '<%= title %>'
+		},
+		xAxis: {
+			categories: [<%= category_labels_as_string %>]
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: '<%= y_axis_label %>'
+			},
+			stackLabels: {
+				enabled: true,
+				style: {
+					fontWeight: 'bold',
+					color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+				}
+			}
+		},
+		legend: {
+			align: 'center',
+			verticalAlign: 'bottom',
+			x: 0,
+			y: 40,
+			layout: 'horizontal',
+			floating: true,
+			backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+			borderColor: '#CCC',
+			borderWidth: 1,
+			shadow: false
+		},
+		tooltip: {
+			formatter: function() {
+				return '<b>'+ this.x +'</b><br/>'+
+					this.series.name +': '+ this.y +'<br/>'+
+					'Total: '+ this.point.stackTotal;
+			}
+		},
+		plotOptions: {
+			column: {
+				stacking: 'normal',
+				dataLabels: {
+					enabled: true,
+					color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+				}
+			},
+			series: {
+                cursor: 'pointer',
+                events: {
+                    click: function(event) {
+                         alert(this.name +' clicked\n'+
+							  event.point.category + ' category\n' +
+							  this.options.url + ' url\n'+
+							  this.options.url2 + ' url\n'+
+                              'Alt: '+ event.altKey +'\n'+
+                              'Control: '+ event.ctrlKey +'\n'+
+                              'Shift: '+ event.shiftKey +'\n'); /* */
+							
+						window.location.href=this.options.url+'&scope='+event.point.category.toLowerCase(); /* */
+
+                    }
+                }
+            }
+            
+		},
+		series: [
+			<%= series_string %>	
+		]
+	});
+});
+

@@ -3,6 +3,10 @@ Travel::Application.routes.draw do
 
   resources :trip_estimates
 
+  namespace :charts do
+	resources :samples
+  end
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config

@@ -2,13 +2,26 @@ class Charts::SamplesController < ApplicationController
   # GET /charts/samples
   # GET /charts/samples.json
   def index
-    @charts_samples = Charts::Sample.all
+	@h = LazyHighCharts::HighChart.new('graph') do |f| 
+		f.options[:chart][:defaultSeriesType] = "area" 
+		f.series(:name=>'John', :data=>[3, 20, 3, 5, 4, 10, 12 ,3, 5,6,7,7,80,9,9]) 
+		f.series(:name=>'Jane', :data=> [1, 3, 4, 3, 3, 5, 4,-46,7,8,8,9,9,0,0,9] ) 
+		end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @charts_samples }
     end
   end
+
+  # def index
+  #   @charts_samples = Charts::Sample.all
+  # 
+  #   respond_to do |format|
+  #     format.html # index.html.erb
+  #     format.json { render json: @charts_samples }
+  #   end
+  # end
 
   # GET /charts/samples/1
   # GET /charts/samples/1.json
